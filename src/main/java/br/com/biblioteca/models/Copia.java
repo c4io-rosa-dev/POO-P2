@@ -23,7 +23,7 @@ public class Copia extends Obra {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
+ 
     public Date getDataAdquirida() {
         return dataAdquirida;
     }
