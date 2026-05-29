@@ -9,6 +9,7 @@ public class Pessoa {
     private String email;
     private String telefone;
     private Date dataNascimento;
+    private String matricula;
 
     public int getId() {
         return id;
@@ -20,6 +21,10 @@ public class Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCpf() {
@@ -52,5 +57,19 @@ public class Pessoa {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    // Usado na exibição em JComboBox na UI.
+    @Override
+    public String toString() {
+        return nome + (matricula != null ? " (" + matricula + ")" : "");
     }
 }

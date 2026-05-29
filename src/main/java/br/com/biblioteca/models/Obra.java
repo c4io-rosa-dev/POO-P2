@@ -1,6 +1,7 @@
 package br.com.biblioteca.models;
 
 public class Obra {
+    private int id;
     private String titulo;
     private String autor;
     private String editora;
@@ -8,6 +9,14 @@ public class Obra {
     private String isbn;
     private String categoria;
     private String tipo;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -63,5 +72,11 @@ public class Obra {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    // Usado na exibição em JComboBox na UI.
+    @Override
+    public String toString() {
+        return titulo + (autor != null ? " — " + autor : "");
     }
 }

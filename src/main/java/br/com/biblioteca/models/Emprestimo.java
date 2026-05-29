@@ -48,18 +48,32 @@ public class Emprestimo {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Leitor getLeitorId() {
         return leitorId;
+    }
+
+    public void setLeitorId(Leitor leitorId) {
+        this.leitorId = leitorId;
     }
 
     public Copia getCopiaId() {
         return copiaId;
     }
 
+    public void setCopiaId (Copia copiaId) {
+        this.copiaId = copiaId;
+    }
+
     public Funcionario getFuncionarioId() {
         return funcionarioId;
     }
-
-        
+    
+    public void setFuncionarioId(Funcionario funcionarioId) {
+        this.funcionarioId = funcionarioId;
+    }
 
 }
