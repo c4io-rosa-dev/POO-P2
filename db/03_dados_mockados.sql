@@ -2,28 +2,29 @@
 -- referenciado por cpf, codigo_tombo, isbn
 
 -- PESSOAS + papeis (heranca)
+-- matricula vive em pessoa (compartilhada entre leitor e funcionario)
 
--- funcionários admin
-INSERT INTO pessoa (nome, cpf, email, telefone, data_nascimento) VALUES
-    ('Caio Rosa',          '11111111111', 'caio@biblioteca.local',  '(11) 90000-0001', '2006-09-06'),
-    ('Vinicius Kenji',     '22222222222', 'kenji@biblioteca.local',  '(11) 90000-0002', '2004-06-22');
+-- funcionários
+INSERT INTO pessoa (nome, cpf, email, telefone, matricula, data_nascimento) VALUES
+    ('Caio Rosa',          '11111111111', 'caio@biblioteca.local',  '(11) 90000-0001', 'F001', '2006-09-06'),
+    ('Vinicius Kenji',     '22222222222', 'kenji@biblioteca.local', '(11) 90000-0002', 'F002', '2004-06-22');
 
-INSERT INTO funcionario (id, matricula, cargo, salario, senha_hash) VALUES
-    ((SELECT id FROM pessoa WHERE cpf = '11111111111'), 'F001', 'Administrador', 4500.00, 'caio123'),
-    ((SELECT id FROM pessoa WHERE cpf = '22222222222'), 'F002', 'Administrador',     2800.00, 'kenji123');
+INSERT INTO funcionario (id, cargo, salario, senha) VALUES
+    ((SELECT id FROM pessoa WHERE cpf = '11111111111'), 'Administrador', 4500.00, 'caio123'),
+    ((SELECT id FROM pessoa WHERE cpf = '22222222222'), 'Administrador', 2800.00, 'kenji123');
 
 -- leitores
-INSERT INTO pessoa (nome, cpf, email, telefone, data_nascimento) VALUES
-    ('Ana Souza',        '33333333333', 'ana.souza@email.com',    '(11) 91111-1111', '2002-05-18'),
-    ('Bruno Lima',       '44444444444', 'bruno.lima@email.com',   '(11) 92222-2222', '1999-11-30'),
-    ('Carla Mendes',     '55555555555', 'carla.mendes@email.com', '(11) 93333-3333', '2005-01-09'),
-    ('Daniel Oliveira',  '66666666666', 'daniel.o@email.com',     '(11) 94444-4444', '1992-09-25');
+INSERT INTO pessoa (nome, cpf, email, telefone, matricula, data_nascimento) VALUES
+    ('Ana Souza',        '33333333333', 'ana.souza@email.com',    '(11) 91111-1111', 'L001', '2002-05-18'),
+    ('Bruno Lima',       '44444444444', 'bruno.lima@email.com',   '(11) 92222-2222', 'L002', '1999-11-30'),
+    ('Carla Mendes',     '55555555555', 'carla.mendes@email.com', '(11) 93333-3333', 'L003', '2005-01-09'),
+    ('Daniel Oliveira',  '66666666666', 'daniel.o@email.com',     '(11) 94444-4444', 'L004', '1992-09-25');
 
-INSERT INTO leitor (id, matricula) VALUES
-    ((SELECT id FROM pessoa WHERE cpf = '33333333333'), 'L001'),
-    ((SELECT id FROM pessoa WHERE cpf = '44444444444'), 'L002'),
-    ((SELECT id FROM pessoa WHERE cpf = '55555555555'), 'L003'),
-    ((SELECT id FROM pessoa WHERE cpf = '66666666666'), 'L004');
+INSERT INTO leitor (id) VALUES
+    ((SELECT id FROM pessoa WHERE cpf = '33333333333')),
+    ((SELECT id FROM pessoa WHERE cpf = '44444444444')),
+    ((SELECT id FROM pessoa WHERE cpf = '55555555555')),
+    ((SELECT id FROM pessoa WHERE cpf = '66666666666'));
 
 -- acervo: obras + copias
 

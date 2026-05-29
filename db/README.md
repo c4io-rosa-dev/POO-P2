@@ -17,7 +17,7 @@ Schema PostgreSQL do projeto final de POO (sistema de controle de biblioteca).
 5. Cole e execute, **nessa ordem**:
    - `01_schema.sql` — cria as 7 tabelas, FKs e CHECKs
    - `02_indices.sql` — cria os índices (inclusive os de unicidade parcial)
-   - `03_seed.sql` — popula dados de teste
+   - `03_dados_mockados.sql` — popula dados de teste
 6. Pra resetar do zero a qualquer momento: rodar `99_drop_all.sql` no banco `biblioteca_poo` e voltar pro passo 5.
 
 ## Conexão JDBC (para a dupla configurar no Java)
@@ -38,6 +38,7 @@ Maven:    org.postgresql:postgresql:42.7.4
                 | id PK            |
                 | nome, cpf UQ     |
                 | email UQ         |
+                | matricula UQ     |
                 +--------+---------+
                          |
               +----------+-----------+
@@ -45,8 +46,8 @@ Maven:    org.postgresql:postgresql:42.7.4
        +------v------+        +------v---------+
        |   leitor    |        |  funcionario   |
        | id PK,FK    |        | id PK,FK       |
-       | matricula   |        | matricula      |
        | ativo       |        | cargo, salario |
+       | inscrito_em |        | senha          |
        +-----+-------+        +-------+--------+
              |                        |
              |                        |
@@ -104,7 +105,7 @@ Tem várias regras que **não dependem do código Java** — o banco já garante
 
 ```sql
 -- 1. Lista todos os emprestimos abertos com dados completos (demonstra heranca + agregacao)
-SELECT p.nome AS leitor, l.matricula, o.titulo, c.codigo_tombo, e.data_emprestimo, e.status
+SELECT p.nome AS leitor, p.matricula, o.titulo, c.codigo_tombo, e.data_emprestimo, e.status
   FROM emprestimo e
   JOIN leitor l  ON l.id = e.leitor_id
   JOIN pessoa p  ON p.id = l.id
@@ -131,16 +132,16 @@ SELECT p.nome AS leitor, o.titulo, r.data_reserva, r.data_expiracao
 
 ## Credenciais de teste (vindas do seed)
 
-| Tipo         | CPF          | Matrícula | Senha     |
-| ------------ | ------------ | --------- | --------- |
-| Funcionário  | 11111111111  | F001      | admin123  |
-| Funcionário  | 22222222222  | F002      | maria123  |
-| Leitor       | 33333333333  | L001      | —         |
-| Leitor       | 44444444444  | L002      | —         |
-| Leitor       | 55555555555  | L003      | —         |
-| Leitor       | 66666666666  | L004      | —         |
+| Tipo         | Nome             | CPF          | Matrícula | Senha     |
+| ------------ | ---------------- | ------------ | --------- | --------- |
+| Funcionário  | Caio Rosa        | 11111111111  | F001      | caio123   |
+| Funcionário  | Vinicius Kenji   | 22222222222  | F002      | kenji123  |
+| Leitor       | Ana Souza        | 33333333333  | L001      | —         |
+| Leitor       | Bruno Lima       | 44444444444  | L002      | —         |
+| Leitor       | Carla Mendes     | 55555555555  | L003      | —         |
+| Leitor       | Daniel Oliveira  | 66666666666  | L004      | —         |
 
-> Senhas estão em texto puro no seed pra simplificar testes iniciais. Quando a dupla implementar o login na UI Swing, ela pode trocar pra hash (bcrypt/SHA-256). O campo `senha_hash` aceita até 255 chars.
+> Senhas estão em texto puro no seed pra simplificar testes iniciais. Quando a dupla implementar o login na UI Swing, ela pode trocar pra hash (bcrypt/SHA-256). O campo `senha` aceita até 255 chars.
 
 ## Opcional: usar o `psql` no terminal
 
