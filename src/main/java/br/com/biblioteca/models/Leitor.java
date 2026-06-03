@@ -2,6 +2,7 @@ package br.com.biblioteca.models;
 
 import java.util.Date;
 
+// Exemplo de herança
 public class Leitor extends Pessoa {
     private boolean ativo;
     private Date dataCadastro;

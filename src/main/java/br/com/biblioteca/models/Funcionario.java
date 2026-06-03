@@ -2,6 +2,7 @@ package br.com.biblioteca.models;
 
 import java.util.Date;
 
+// Exemplo de herança: Funcionário herda "características" (campos) de Pessoa
 public class Funcionario extends Pessoa {
     private String cargo;
     private double salario;

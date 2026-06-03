@@ -17,8 +17,6 @@ public class Main {
         }
 
         DAOFactory fac = new DAOFactory();
-
-        // A UI Swing deve ser construída na Event Dispatch Thread.
         SwingUtilities.invokeLater(() -> new MainFrame(fac).setVisible(true));
     }
 }

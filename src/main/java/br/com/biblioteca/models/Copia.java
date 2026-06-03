@@ -5,9 +5,9 @@ import java.util.Date;
 /**
  * Cópia física de uma Obra.
  *
- * AGREGAÇÃO (não herança): uma Copia NÃO é um tipo de Obra — ela PERTENCE a
- * uma Obra. Por isso guarda uma referência {@code obra} em vez de estender Obra.
- * Bate com o banco, onde copia tem FK obra_id apontando para obra.
+ * AGREGAÇÃO (não herança): Cópia PERTENCE a uma Obra.
+ * Por isso guarda uma referência {@code obra} em vez de estender Obra.
+ * Sincronizado com o banco, onde Cópia tem FK obra_id apontando para Obra.
  */
 public class Copia {
     private int id;
